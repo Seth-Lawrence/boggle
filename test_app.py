@@ -34,5 +34,21 @@ class BoggleAppTestCase(TestCase):
         """Test starting a new game."""
 
         with app.test_client() as client:
-            ...
-            # write a test for this route
+            response = client.post('/api/new-game')
+            game_data = response.get_json()
+
+            print("game data=",game_data)
+            print("games=", games)
+
+            self.assertTrue(game_data)
+            #test the length?
+            self.assertTrue(len(game_data) == 2)
+            self.assertEqual(game_data["game_id"], games["game_id"])
+
+
+
+
+
+
+
+
