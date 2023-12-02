@@ -36,14 +36,27 @@ class BoggleAppTestCase(TestCase):
         with app.test_client() as client:
             response = client.post('/api/new-game')
             game_data = response.get_json()
+            gameID = game_data["game_id"]
+            game_board = game_data["board"]
 
+            # is there anything in the string
+            # concat. + next index in the string
+            letters_in_board = ""
+
+            for list in game_board:
+                letters_in_board += "".join(list) + "."
+
+            letters_in_board = letters_in_board[:-1]
+
+
+            print("letters_in_board=", letters_in_board)
             print("game data=",game_data)
             print("games=", games)
 
             self.assertTrue(game_data)
-            #test the length?
-            self.assertTrue(len(game_data) == 2)
-            self.assertEqual(game_data["game_id"], games["game_id"])
+            self.assertEqual(len(game_data), 2)
+            self.assertIn(gameID, games.keys())
+            self.assertIn(letters_in_board, str(games[gameID]))
 
 
 
