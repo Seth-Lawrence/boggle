@@ -30,3 +30,15 @@ def new_game():
 
     return jsonify(result)
     #{"gameId": "need-real-id", "board": "need-real-board"}
+
+@app.post("/api/score-word")
+def score_word():
+    """accepts a POST request with JSON for game id and word. Checks legality
+    of word"""
+    word = request.json["word"]
+    return jsonify({"result":"okay"})
+
+
+
+
+
